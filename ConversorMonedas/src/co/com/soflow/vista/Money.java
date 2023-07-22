@@ -50,8 +50,8 @@ public class Money {
 	}
 public void resultado_conversion(String tipoConvercion, String cantidaDinero) {
 		
-		String datos_api[];//guarda los daots que se envia a  la API
-		datos_api= new String[4];
+		String DAtos[];
+		DAtos= new String[4];
 		
 		String pasar_De="",pasar_a = "";
 	
@@ -122,35 +122,24 @@ public void resultado_conversion(String tipoConvercion, String cantidaDinero) {
 		
 		
 		
-		// obtener la fecha actual 
+	
 		LocalDate actualDate =LocalDate.now();
-		// pasar de tipo LocalDate a String
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 		String fecha_formateada = actualDate.format(formatter);
 		
+
+		DAtos[0]= fecha_formateada; 
+		DAtos[1]=cantidaDinero;
+		DAtos[2]=pasar_De;
+		DAtos[3]=pasar_a;
 		
-		// guardar los datos en el array
-		datos_api[0]= fecha_formateada; 
-		datos_api[1]=cantidaDinero;
-		datos_api[2]=pasar_De;
-		datos_api[3]=pasar_a;
-		
-		//pasar datos a la Api
 		Operation respuesta = new Operation();
-		double valor_convertido=respuesta.obtener(datos_api[0],datos_api[1],datos_api[2],datos_api[3]);
+		double valor_convertido=respuesta.obtener(DAtos[0],DAtos[1],DAtos[2],DAtos[3]);	
+		double ForDAtos=0;
 		
-		
-		//formato decimales del  resultado
-		double valor_formateado=0;
-		
-		valor_formateado=Math.round((valor_convertido*100.0)/100.0);
-		
-		
-		//mostrar conversión
-		JOptionPane.showMessageDialog(null,"El valor de la conversión  "+ tipoConvercion+ " es : $"+ valor_formateado);
-		
-		//mensaje final
-		
+		ForDAtos=Math.round((valor_convertido*100.0)/100.0);
+		JOptionPane.showMessageDialog(null,"El valor de la conversion   "+ tipoConvercion+ " es : $"+ ForDAtos);
 		Message mensaje_final= new Message();
 		mensaje_final.mensaje();
 		
